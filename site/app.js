@@ -31,6 +31,7 @@ const $ = (id) => document.getElementById(id);
 const status = $('status');
 const themeSelect = $('theme');
 const toolbarToggle = $('toolbar');
+const gridlinesToggle = $('gridlines');
 const stage = $('stage');
 
 let viewer;
@@ -46,7 +47,11 @@ function formatSize(bytes) {
 
 function createPlaygroundViewer() {
   viewer?.destroy();
-  viewer = createViewer('#viewer', { theme: themeSelect.value, toolbar: toolbarToggle.checked });
+  viewer = createViewer('#viewer', {
+    theme: themeSelect.value,
+    toolbar: toolbarToggle.checked,
+    tableGridlines: gridlinesToggle.checked,
+  });
   viewer.on('loadstart', () => {
     status.textContent = 'Opening…';
   });
@@ -130,11 +135,13 @@ stage.addEventListener('drop', (event) => {
 
 // Options.
 themeSelect.addEventListener('change', () => viewer.setTheme(themeSelect.value));
-toolbarToggle.addEventListener('change', () => {
-  // The toolbar is chosen when a viewer is created, so build a new one.
-  createPlaygroundViewer();
-  if (current) open(current.source, current.name);
-});
+for (const toggle of [toolbarToggle, gridlinesToggle]) {
+  toggle.addEventListener('change', () => {
+    // These options are chosen when a viewer is created, so build a new one.
+    createPlaygroundViewer();
+    if (current) open(current.source, current.name);
+  });
+}
 
 // Install command.
 $('copy-install').addEventListener('click', async () => {

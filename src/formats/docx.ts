@@ -2106,6 +2106,18 @@ class DocxRenderer {
       for (const side of SIDES) {
         box.td.style.setProperty(`border-${side}`, borderCss(box.borders[side].border) ?? 'none');
       }
+      // Edges without a border, for the optional gridlines. A shared edge belongs to the cell
+      // below or to the right of it, so that it is drawn once.
+      const open = (side: Side): boolean => {
+        const border = box.borders[side].border;
+        return !border || border.style === 'none';
+      };
+      const gridlines =
+        (open('top') ? 't' : '') +
+        (open('left') ? 'l' : '') +
+        (open('bottom') && !occupancy[box.row + box.rowSpan]?.[box.col] ? 'b' : '') +
+        (open('right') && !occupancy[box.row]?.[box.col + box.colSpan] ? 'r' : '');
+      if (gridlines) box.td.setAttribute('data-av-g', gridlines);
       this.cells.push({
         para: merge<ParaProps>(stylePara, ...formats.map((format) => format.para)),
         run: merge<RunProps>(styleRun, ...formats.map((format) => format.run)),

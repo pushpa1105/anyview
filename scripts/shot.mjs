@@ -64,8 +64,13 @@ page.on('pageerror', (error) => console.log('page error:', error.message));
 await page.goto(`${origin}/tests/browser/harness.html`);
 await page.waitForFunction('window.__ready === true');
 const result = await page.evaluate(
-  ([url, theme, pdfjs]) => window.__open(url, { theme, pdfjs }),
-  [`/__file/${encodeURIComponent(basename(file))}`, flags.theme ?? 'light', Boolean(flags.pdfjs)],
+  ([url, theme, pdfjs, gridlines]) => window.__open(url, { theme, pdfjs, gridlines }),
+  [
+    `/__file/${encodeURIComponent(basename(file))}`,
+    flags.theme ?? 'light',
+    Boolean(flags.pdfjs),
+    Boolean(flags.gridlines),
+  ],
 );
 console.log(JSON.stringify(result));
 if (flags.sheet) {

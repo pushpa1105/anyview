@@ -178,6 +178,11 @@ export interface ViewerOptions {
   pdfjs?: PdfJsLike | (() => PdfJsLike | Promise<PdfJsLike>);
   /** Override any UI text (for translation). */
   labels?: Partial<Labels>;
+  /**
+   * Draw dashed gridlines on the edges of Word table cells that have no border, like Word does
+   * on screen with "View Gridlines" switched on. They are not printed. Default `false`.
+   */
+  tableGridlines?: boolean;
   /** Extra class name(s) for the root element. */
   className?: string;
   /** CSP nonce for the injected `<style>` element. */
@@ -193,6 +198,7 @@ export interface ResolvedViewerOptions {
   fetchOptions: RequestInit | undefined;
   renderers: readonly RendererDefinition[];
   pdfjs: ViewerOptions['pdfjs'];
+  tableGridlines: boolean;
   className: string | undefined;
   styleNonce: string | undefined;
 }

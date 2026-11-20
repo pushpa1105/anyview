@@ -178,7 +178,7 @@ export function Preview() {
 }
 ```
 
-`src`, `name`, `type` and `theme` are reactive. Other options are read when the component mounts; change the component's `key` to apply new ones. A `ref` gives you `{ viewer }` for calling the [viewer API](#viewer-api). Callbacks: `onLoadStart`, `onLoad`, `onError`, `onPageChange`, `onZoomChange`.
+`src`, `name`, `type` and `theme` are reactive. Other options (including `tableGridlines`) are read when the component mounts; change the component's `key` to apply new ones. A `ref` gives you `{ viewer }` for calling the [viewer API](#viewer-api). Callbacks: `onLoadStart`, `onLoad`, `onError`, `onPageChange`, `onZoomChange`.
 
 ### Vue 3
 
@@ -222,20 +222,21 @@ createViewer(container, options?)
 
 `container` is an element or a CSS selector.
 
-| Option         | Type                                     | Default         | Description                                                                                                                             |
-| -------------- | ---------------------------------------- | --------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `src`          | [source](#sources)                       | none            | File to open immediately.                                                                                                               |
-| `name`         | `string`                                 | from the source | File name, used for detection, the toolbar and downloads.                                                                               |
-| `type`         | `string`                                 | detected        | Force a format: an id (`"docx"`), extension (`".docx"`) or MIME type.                                                                   |
-| `toolbar`      | `boolean \| ToolbarOptions`              | `true`          | `false` hides the toolbar. An object switches individual controls: `fileName`, `zoom`, `pagination`, `download`, `print`, `fullscreen`. |
-| `theme`        | `'light' \| 'dark' \| 'auto'`            | `'auto'`        | `auto` follows the operating system.                                                                                                    |
-| `maxFileSize`  | `number` (bytes)                         | 200 MB          | Larger files are rejected with `FILE_TOO_LARGE`.                                                                                        |
-| `fetchOptions` | `RequestInit`                            | none            | Passed to `fetch` for URL sources (headers, credentials…).                                                                              |
-| `renderers`    | `RendererDefinition[]`                   | `[]`            | [Custom renderers](#custom-renderers); they take priority over built-in ones.                                                           |
-| `pdfjs`        | PDF.js module or a function returning it | none            | See [PDF rendering with PDF.js](#pdf-rendering-with-pdfjs).                                                                             |
-| `labels`       | `Partial<Labels>`                        | English         | Override any UI text. See [Translation](#translation).                                                                                  |
-| `className`    | `string`                                 | none            | Extra class on the root element.                                                                                                        |
-| `styleNonce`   | `string`                                 | none            | CSP nonce for the injected `<style>` element.                                                                                           |
+| Option           | Type                                     | Default         | Description                                                                                                                              |
+| ---------------- | ---------------------------------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `src`            | [source](#sources)                       | none            | File to open immediately.                                                                                                                |
+| `name`           | `string`                                 | from the source | File name, used for detection, the toolbar and downloads.                                                                                |
+| `type`           | `string`                                 | detected        | Force a format: an id (`"docx"`), extension (`".docx"`) or MIME type.                                                                    |
+| `toolbar`        | `boolean \| ToolbarOptions`              | `true`          | `false` hides the toolbar. An object switches individual controls: `fileName`, `zoom`, `pagination`, `download`, `print`, `fullscreen`.  |
+| `theme`          | `'light' \| 'dark' \| 'auto'`            | `'auto'`        | `auto` follows the operating system.                                                                                                     |
+| `maxFileSize`    | `number` (bytes)                         | 200 MB          | Larger files are rejected with `FILE_TOO_LARGE`.                                                                                         |
+| `fetchOptions`   | `RequestInit`                            | none            | Passed to `fetch` for URL sources (headers, credentials…).                                                                               |
+| `renderers`      | `RendererDefinition[]`                   | `[]`            | [Custom renderers](#custom-renderers); they take priority over built-in ones.                                                            |
+| `pdfjs`          | PDF.js module or a function returning it | none            | See [PDF rendering with PDF.js](#pdf-rendering-with-pdfjs).                                                                              |
+| `tableGridlines` | `boolean`                                | `false`         | Word files: draw dashed gridlines on table cell edges that have no border, as Word does on screen with "View Gridlines" on. Not printed. |
+| `labels`         | `Partial<Labels>`                        | English         | Override any UI text. See [Translation](#translation).                                                                                   |
+| `className`      | `string`                                 | none            | Extra class on the root element.                                                                                                         |
+| `styleNonce`     | `string`                                 | none            | CSP nonce for the injected `<style>` element.                                                                                            |
 
 Invalid options throw an `AnyViewError` with the code `INVALID_OPTIONS` straight away.
 

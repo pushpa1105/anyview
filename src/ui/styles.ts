@@ -140,6 +140,12 @@ export const CSS = `
 .av-doc-tab[data-av-leader-style=line]>span::before{content:"________________________________________________________________________________________________________________________________________________________________"}
 .av-doc-table{border-collapse:collapse;max-width:none!important}
 .av-doc-table td{overflow-wrap:break-word}
+.av-doc-gridlines .av-doc-table td[data-av-g]{position:relative}
+.av-doc-gridlines .av-doc-table td[data-av-g]::after{content:"";position:absolute;inset:0;border:0 dashed #9aa0a6;pointer-events:none}
+.av-doc-gridlines .av-doc-table td[data-av-g*=t]::after{border-top-width:1px}
+.av-doc-gridlines .av-doc-table td[data-av-g*=l]::after{border-left-width:1px}
+.av-doc-gridlines .av-doc-table td[data-av-g*=b]::after{border-bottom-width:1px}
+.av-doc-gridlines .av-doc-table td[data-av-g*=r]::after{border-right-width:1px}
 .av-slide{position:absolute;top:0;left:0;transform-origin:0 0;overflow:hidden;background:#fff;color:#000;font-family:Calibri,Carlito,Arial,sans-serif}
 .av-slide-shape{position:absolute;display:flex;flex-direction:column;overflow:visible}
 .av-slide-shape p{margin:0;white-space:pre-wrap;overflow-wrap:break-word}

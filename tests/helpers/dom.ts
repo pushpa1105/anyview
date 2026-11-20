@@ -97,6 +97,7 @@ export function renderContext(
       fetchOptions: undefined,
       renderers: [],
       pdfjs: undefined,
+      tableGridlines: false,
       className: undefined,
       styleNonce: undefined,
     },
