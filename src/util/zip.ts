@@ -1,5 +1,5 @@
 import { AnyViewError } from '../core/errors';
-import { decodeText, toBlobPart } from './text';
+import { decodeText } from './text';
 
 /**
  * A minimal ZIP reader. Decompression uses the browser's native
@@ -117,15 +117,24 @@ export async function inflateRaw(data: Uint8Array, limit = Infinity): Promise<Ui
   }
   const inflater = new DecompressionStream('deflate-raw');
   const writer = inflater.writable.getWriter();
-  // Write errors surface on the readable side, where they are handled below.
-  writer.write(toBlobPart(data)).catch(() => undefined);
-  writer.close().catch(() => undefined);
   const reader = inflater.readable.getReader();
+  // A failed write normally errors the readable side too, but not in every
+  // runtime; cancelling the reader guarantees the loop below never waits forever.
+  let writeError: unknown;
+  let writeFailed = false;
+  // The chunk must be a typed array: Node before v24 rejects a bare ArrayBuffer.
+  writer.write(data as Uint8Array<ArrayBuffer>).catch((error: unknown) => {
+    writeFailed = true;
+    writeError = error;
+    reader.cancel().catch(() => undefined);
+  });
+  writer.close().catch(() => undefined);
   const chunks: Uint8Array[] = [];
   let total = 0;
   try {
     for (;;) {
       const { done, value } = await reader.read();
+      if (writeFailed) throw writeError;
       if (done) break;
       const chunk = value as Uint8Array;
       total += chunk.length;
