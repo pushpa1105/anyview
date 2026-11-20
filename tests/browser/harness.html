@@ -25,7 +25,10 @@
 
       window.__open = async (url, options = {}) => {
         window.__viewer?.destroy();
-        const viewerOptions = { theme: options.theme ?? 'light' };
+        const viewerOptions = {
+          theme: options.theme ?? 'light',
+          ...(options.gridlines == null ? {} : { tableGridlines: Boolean(options.gridlines) }),
+        };
         if (options.pdfjs) {
           const pdfjs = await import('/node_modules/pdfjs-dist/build/pdf.mjs');
           pdfjs.GlobalWorkerOptions.workerSrc = '/node_modules/pdfjs-dist/build/pdf.worker.mjs';

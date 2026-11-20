@@ -1,7 +1,7 @@
 // Developer tool: opens one file in real Chrome/Edge with the built package and
 // saves screenshots, for comparing a rendering with the original application.
 //
-//   node scripts/shot.mjs <file> [outPrefix] [--scroll=0,900,1800] [--sheet=1] [--width=1300] [--height=900] [--eval=js]
+//   node scripts/shot.mjs <file> [outPrefix] [--scroll=0,900,1800] [--sheet=1] [--width=1300] [--height=900] [--eval=js] [--gridlines=0]
 import { createReadStream, existsSync, mkdirSync, statSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { basename, dirname, extname, join, normalize, resolve } from 'node:path';
@@ -64,8 +64,13 @@ page.on('pageerror', (error) => console.log('page error:', error.message));
 await page.goto(`${origin}/tests/browser/harness.html`);
 await page.waitForFunction('window.__ready === true');
 const result = await page.evaluate(
-  ([url, theme, pdfjs]) => window.__open(url, { theme, pdfjs }),
-  [`/__file/${encodeURIComponent(basename(file))}`, flags.theme ?? 'light', Boolean(flags.pdfjs)],
+  ([url, theme, pdfjs, gridlines]) => window.__open(url, { theme, pdfjs, gridlines }),
+  [
+    `/__file/${encodeURIComponent(basename(file))}`,
+    flags.theme ?? 'light',
+    Boolean(flags.pdfjs),
+    flags.gridlines === undefined ? null : flags.gridlines !== '0',
+  ],
 );
 console.log(JSON.stringify(result));
 if (flags.sheet) {

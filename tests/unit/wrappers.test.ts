@@ -256,6 +256,7 @@ describe('React <AnyView>', () => {
         src: textFile('x', 'thing.fake'),
         toolbar: false,
         maxFileSize: 1000,
+        tableGridlines: true,
         fetchOptions: { credentials: 'include' },
         labels: { loading: 'Please wait' },
         styleNonce: 'n',

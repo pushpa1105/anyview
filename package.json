@@ -1,6 +1,6 @@
 {
   "name": "@buffmomo/anyview",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Framework-agnostic, zero-dependency universal file viewer for the web. Preview documents, spreadsheets, presentations, PDFs, images, video, audio, code and more, entirely in the browser.",
   "keywords": [
     "file-viewer",
@@ -36,12 +36,12 @@
   },
   "author": {
     "name": "pushpa1105",
-    "url": "https://www.npmjs.com/org/buffmomo"
+    "url": "https://github.com/pushpa1105"
   },
   "contributors": [
     {
       "name": "pushpa1105",
-      "url": "https://www.npmjs.com/org/buffmomo"
+      "url": "https://github.com/pushpa1105"
     }
   ],
   "type": "module",

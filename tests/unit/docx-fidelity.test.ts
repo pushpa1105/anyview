@@ -538,6 +538,14 @@ describe('DOCX tables', () => {
     expect(spanWith(element, 't2').style.fontStyle).toBe('italic');
     expect(spanWith(element, 't4').style.textDecoration).toContain('line-through');
     expect(td('t2').style.borderBottom).toContain('solid');
+    // Edges without a border are recorded for the optional gridlines: the header cells have no
+    // lines between them and no line at the sides of the table.
+    expect(td('h1').getAttribute('data-av-g')).toBe('l');
+    expect(td('h2').getAttribute('data-av-g')).toBe('l');
+    expect(td('h4').getAttribute('data-av-g')).toBe('lr');
+    // A shared edge is recorded once, on the cell below it.
+    expect(td('a2').getAttribute('data-av-g')).toBeNull();
+    expect(td('b2').getAttribute('data-av-g')).toBe('t');
     expect(td('a1').style.padding).toMatch(/^0px 7.2px/);
     // In tables the table style wins over the size and alignment of the default paragraph style.
     expect(spanWith(element, 'b2').style.fontSize).toBe('11pt');

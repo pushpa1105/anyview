@@ -8,6 +8,7 @@ html,body{margin:0;padding:0;background:#fff}
 .av-page{box-shadow:none;break-after:page;margin:0 auto}
 .av-doc{display:block;zoom:1!important}
 .av-doc-page{break-after:page;margin:0 auto}
+.av-doc-gridlines .av-doc-table td::after{display:none!important}
 .av-code-gutter{position:static}
 img{max-width:100%}
 `;

@@ -66,6 +66,10 @@ function resolveOptions(options: ViewerOptions): ResolvedViewerOptions {
       throw invalidOption('Each custom renderer needs a string "id" and a "load" function.');
     }
   }
+  const tableGridlines = options.tableGridlines ?? true;
+  if (typeof tableGridlines !== 'boolean') {
+    throw invalidOption('tableGridlines must be true or false.');
+  }
   const toolbar =
     options.toolbar === false
       ? null
@@ -79,6 +83,7 @@ function resolveOptions(options: ViewerOptions): ResolvedViewerOptions {
     fetchOptions: options.fetchOptions,
     renderers,
     pdfjs: options.pdfjs,
+    tableGridlines,
     className: options.className,
     styleNonce: options.styleNonce,
   };

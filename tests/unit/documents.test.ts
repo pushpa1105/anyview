@@ -246,6 +246,17 @@ describe('DOCX', () => {
     });
   });
 
+  it('marks the document for table gridlines only when the option is set', async () => {
+    const plain = renderContext(docxFixture(), 'report.docx', 'docx');
+    instanceOf(await docxRenderer.render(plain.context)).destroy!();
+    expect(plain.container.querySelector('.av-doc-gridlines')).toBeNull();
+
+    const base = renderContext(docxFixture(), 'report.docx', 'docx');
+    const context = { ...base.context, options: { ...base.context.options, tableGridlines: true } };
+    instanceOf(await docxRenderer.render(context)).destroy!();
+    expect(base.container.querySelector('.av-doc.av-doc-gridlines')).not.toBeNull();
+  });
+
   it('renders on a zoomable sheet of paper', async () => {
     const { context, container } = renderContext(docxFixture(), 'report.docx', 'docx');
     const instance = instanceOf(await docxRenderer.render(context));

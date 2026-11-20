@@ -20,6 +20,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   sets, data bars, colour scales and rules), pictures and charts.
 - **PPTX:** more than fifty preset shapes and custom shapes drawn from their outlines, dashed
   lines and arrow heads, charts, cropped pictures, and table cell borders, margins and alignment.
+- Word table cell edges without a border are drawn as dashed gridlines, like Word does on screen
+  with "View Gridlines" switched on. They are never printed. The `tableGridlines` option
+  (default `true`) switches them off.
+- A documentation site with a playground (`site/`, built with `npm run site`), continuous
+  integration and a GitHub Pages deployment.
 - `scripts/shot.mjs`, a developer tool that screenshots one file in a real browser for comparison
   with the original application.
 

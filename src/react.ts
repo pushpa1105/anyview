@@ -74,6 +74,7 @@ export const AnyView: ForwardRefExoticComponent<AnyViewProps & RefAttributes<Any
         ...(options.renderers ? { renderers: options.renderers } : {}),
         ...(options.pdfjs ? { pdfjs: options.pdfjs } : {}),
         ...(options.labels ? { labels: options.labels } : {}),
+        ...(options.tableGridlines !== undefined ? { tableGridlines: options.tableGridlines } : {}),
         ...(options.styleNonce ? { styleNonce: options.styleNonce } : {}),
       });
       viewer.current = instance;

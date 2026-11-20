@@ -63,6 +63,7 @@ describe('createViewer: setup', () => {
     ['a negative size limit', { maxFileSize: -1 }],
     ['a non-numeric size limit', { maxFileSize: '10' }],
     ['renderers that are not an array', { renderers: {} }],
+    ['gridlines that are not a boolean', { tableGridlines: 'yes' }],
     ['a renderer without load()', { renderers: [{ id: 'x' }] }],
     ['a renderer without an id', { renderers: [{ load: () => ({}) }] }],
   ])('rejects %s', (_label, options) => {
