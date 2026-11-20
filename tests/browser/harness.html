@@ -27,7 +27,7 @@
         window.__viewer?.destroy();
         const viewerOptions = {
           theme: options.theme ?? 'light',
-          tableGridlines: Boolean(options.gridlines),
+          ...(options.gridlines == null ? {} : { tableGridlines: Boolean(options.gridlines) }),
         };
         if (options.pdfjs) {
           const pdfjs = await import('/node_modules/pdfjs-dist/build/pdf.mjs');

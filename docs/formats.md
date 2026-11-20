@@ -46,7 +46,7 @@ Fidelity notes:
 
 - Pagination uses the browser's text layout. With the document's fonts available (installed, or embedded in the file) the page breaks match Word in the documents this was tested with. When a font is missing the browser substitutes one, lines break differently and page breaks can move. Office "cloud fonts" such as Aptos are only available to a browser if they are installed on the device.
 - Word does not load embedded fonts while a document is open in Protected View or read-only mode, so such a document can look different in Word itself until editing is enabled. AnyView always uses the embedded fonts.
-- Word can show dashed gridlines on screen around table cells that have no border (Table Layout, "View Gridlines"). They are an editing aid, not part of the document, and are not printed. AnyView leaves them out unless the `tableGridlines` option is set.
+- Word shows dashed gridlines on screen around table cells that have no border when "View Gridlines" is switched on (Table Layout tab). They are an editing aid, not part of the document, and are not printed. AnyView draws them the same way by default and never prints them; set the `tableGridlines` option to `false` to see only the borders stored in the document, which is what Word prints.
 - Layout runs once after loading. Without a layout engine (for example in a server-side test environment) the document is split at explicit page breaks only.
 
 ### OpenDocument Text (`odt`): .odt, .ott

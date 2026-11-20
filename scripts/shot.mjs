@@ -1,7 +1,7 @@
 // Developer tool: opens one file in real Chrome/Edge with the built package and
 // saves screenshots, for comparing a rendering with the original application.
 //
-//   node scripts/shot.mjs <file> [outPrefix] [--scroll=0,900,1800] [--sheet=1] [--width=1300] [--height=900] [--eval=js]
+//   node scripts/shot.mjs <file> [outPrefix] [--scroll=0,900,1800] [--sheet=1] [--width=1300] [--height=900] [--eval=js] [--gridlines=0]
 import { createReadStream, existsSync, mkdirSync, statSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { basename, dirname, extname, join, normalize, resolve } from 'node:path';
@@ -69,7 +69,7 @@ const result = await page.evaluate(
     `/__file/${encodeURIComponent(basename(file))}`,
     flags.theme ?? 'light',
     Boolean(flags.pdfjs),
-    Boolean(flags.gridlines),
+    flags.gridlines === undefined ? null : flags.gridlines !== '0',
   ],
 );
 console.log(JSON.stringify(result));

@@ -66,7 +66,7 @@ function resolveOptions(options: ViewerOptions): ResolvedViewerOptions {
       throw invalidOption('Each custom renderer needs a string "id" and a "load" function.');
     }
   }
-  const tableGridlines = options.tableGridlines ?? false;
+  const tableGridlines = options.tableGridlines ?? true;
   if (typeof tableGridlines !== 'boolean') {
     throw invalidOption('tableGridlines must be true or false.');
   }

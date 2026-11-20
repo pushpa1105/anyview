@@ -180,7 +180,8 @@ export interface ViewerOptions {
   labels?: Partial<Labels>;
   /**
    * Draw dashed gridlines on the edges of Word table cells that have no border, like Word does
-   * on screen with "View Gridlines" switched on. They are not printed. Default `false`.
+   * on screen with "View Gridlines" switched on. They are not printed. Default `true`; set
+   * `false` to show only the borders stored in the document, as Word prints it.
    */
   tableGridlines?: boolean;
   /** Extra class name(s) for the root element. */
