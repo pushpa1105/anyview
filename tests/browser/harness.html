@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AnyView browser check</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+      }
+      #host {
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="host"></div>
+    <script type="module">
+      import { createViewer } from '/dist/index.js';
+
+      // Scripts embedded in sample files try to post a message here. None may arrive.
+      window.__messages = [];
+      window.addEventListener('message', (event) => window.__messages.push(String(event.data)));
+
+      window.__open = async (url, options = {}) => {
+        window.__viewer?.destroy();
+        const viewerOptions = { theme: options.theme ?? 'light' };
+        if (options.pdfjs) {
+          const pdfjs = await import('/node_modules/pdfjs-dist/build/pdf.mjs');
+          pdfjs.GlobalWorkerOptions.workerSrc = '/node_modules/pdfjs-dist/build/pdf.worker.mjs';
+          viewerOptions.pdfjs = pdfjs;
+        }
+        const viewer = createViewer('#host', viewerOptions);
+        window.__viewer = viewer;
+        try {
+          await viewer.load(url);
+        } catch (error) {
+          return { state: viewer.state, error: { code: error.code, message: error.message } };
+        }
+        return {
+          state: viewer.state,
+          format: viewer.format?.id ?? null,
+          page: viewer.getPage(),
+          zoom: viewer.getZoom(),
+        };
+      };
+      window.__ready = true;
+    </script>
+  </body>
+</html>

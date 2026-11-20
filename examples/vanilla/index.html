@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AnyView: plain JavaScript example</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        font-family: system-ui, sans-serif;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+      }
+      header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 16px;
+        border-bottom: 1px solid #d0d7de;
+      }
+      header input[type='url'] {
+        flex: 1 1 240px;
+        padding: 6px 8px;
+      }
+      #status {
+        color: #656d76;
+        font-size: 13px;
+      }
+      /* The viewer fills its container, so the container needs a size. */
+      #preview {
+        flex: 1 1 auto;
+        min-height: 0;
+      }
+      #preview.dragging {
+        outline: 3px dashed #0969da;
+        outline-offset: -6px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <input type="file" id="file" aria-label="Choose a file" />
+      <input
+        type="url"
+        id="url"
+        placeholder="…or paste a file URL and press Enter"
+        aria-label="File URL"
+      />
+      <select id="theme" aria-label="Theme">
+        <option value="auto">Auto theme</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+      <span id="status">Choose a file, paste a URL, or drop a file below.</span>
+    </header>
+    <div id="preview"></div>
+
+    <script type="module">
+      // In your own project: import { createViewer } from '@buffmomo/anyview';
+      import { createViewer } from '../../dist/index.js';
+
+      const container = document.getElementById('preview');
+      const status = document.getElementById('status');
+      const viewer = createViewer(container);
+
+      viewer.on('loadstart', () => (status.textContent = 'Loading…'));
+      viewer.on('load', ({ format, file }) => {
+        status.textContent = `${file.name || 'File'}: ${format.label}`;
+      });
+      viewer.on('error', (error) => {
+        status.textContent = `${error.code}: ${error.message}`;
+      });
+
+      // load() rejects on failure; the viewer already shows the error, so it is ignored here.
+      const open = (source) => viewer.load(source).catch(() => {});
+
+      document.getElementById('file').addEventListener('change', (event) => {
+        const [file] = event.target.files;
+        if (file) open(file);
+      });
+
+      document.getElementById('url').addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' && event.target.value.trim()) open(event.target.value.trim());
+      });
+
+      document.getElementById('theme').addEventListener('change', (event) => {
+        viewer.setTheme(event.target.value);
+      });
+
+      // Drag and drop.
+      container.addEventListener('dragover', (event) => {
+        event.preventDefault();
+        container.classList.add('dragging');
+      });
+      container.addEventListener('dragleave', () => container.classList.remove('dragging'));
+      container.addEventListener('drop', (event) => {
+        event.preventDefault();
+        container.classList.remove('dragging');
+        const [file] = event.dataTransfer.files;
+        if (file) open(file);
+      });
+
+      // Deep link: index.html?src=/path/to/file.pdf
+      const initial = new URLSearchParams(location.search).get('src');
+      if (initial) open(initial);
+    </script>
+  </body>
+</html>

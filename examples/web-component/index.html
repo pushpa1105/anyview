@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AnyView: web component example</title>
+    <style>
+      body {
+        margin: 24px;
+        font-family: system-ui, sans-serif;
+      }
+      any-view {
+        height: 520px;
+        border: 1px solid #d0d7de;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      p {
+        color: #656d76;
+      }
+    </style>
+    <!-- In your own project: import '@buffmomo/anyview/element'; -->
+    <script type="module" src="../../dist/element.js"></script>
+  </head>
+  <body>
+    <h1>&lt;any-view&gt;</h1>
+    <p>
+      <input type="file" id="file" aria-label="Choose a file" />
+      <button id="toggle" type="button">Toggle dark theme</button>
+      <span id="status"></span>
+    </p>
+
+    <!-- Attributes: src, name, type, theme, toolbar -->
+    <any-view id="viewer" theme="light"></any-view>
+
+    <script type="module">
+      const element = document.getElementById('viewer');
+      const status = document.getElementById('status');
+
+      // Deep link: index.html?src=/path/to/file.pdf
+      const initial = new URLSearchParams(location.search).get('src');
+      if (initial) element.setAttribute('src', initial);
+
+      // Anything that is not a URL (File, Blob, bytes) goes through the "source" property.
+      document.getElementById('file').addEventListener('change', (event) => {
+        const [file] = event.target.files;
+        if (file) element.source = file;
+      });
+
+      document.getElementById('toggle').addEventListener('click', () => {
+        element.setAttribute('theme', element.getAttribute('theme') === 'dark' ? 'light' : 'dark');
+      });
+
+      // Events carry their payload in event.detail.
+      element.addEventListener('av-load', (event) => {
+        status.textContent = `Loaded: ${event.detail.format.label}`;
+      });
+      element.addEventListener('av-error', (event) => {
+        status.textContent = `${event.detail.code}: ${event.detail.message}`;
+      });
+    </script>
+  </body>
+</html>
