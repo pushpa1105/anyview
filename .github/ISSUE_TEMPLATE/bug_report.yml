@@ -1,0 +1,50 @@
+name: Bug report or wrong rendering
+description: A file does not open, or looks different from the original application.
+labels: [bug]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: AnyView version
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and operating system
+      placeholder: Chrome 140 on Windows 11
+    validations:
+      required: true
+  - type: dropdown
+    id: format
+    attributes:
+      label: File type
+      options:
+        - Word (docx)
+        - Excel (xlsx)
+        - PowerPoint (pptx)
+        - PDF
+        - OpenDocument (odt, ods, odp)
+        - Image, video or audio
+        - Text, code or Markdown
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+      description: For rendering differences, a screenshot of AnyView next to the original application helps most.
+    validations:
+      required: true
+  - type: textarea
+    id: file
+    attributes:
+      label: Sample file
+      description: Attach a file that shows the problem. Remove anything private first; issues are public.
+  - type: textarea
+    id: error
+    attributes:
+      label: Error code and message
+      description: The code shown in the viewer or delivered to the error event, if any.

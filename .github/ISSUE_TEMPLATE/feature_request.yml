@@ -1,0 +1,20 @@
+name: Feature or format request
+description: Suggest a new format, or something a supported format should show.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What would you like AnyView to do?
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Where would you use it?
+      description: A short description of your use case helps to judge the priority.
+  - type: textarea
+    id: file
+    attributes:
+      label: Sample file
+      description: For a format request, attach a small example. Remove anything private first; issues are public.

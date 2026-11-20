@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AnyView: one viewer for every file</title>
+    <meta
+      name="description"
+      content="AnyView previews Word, Excel, PowerPoint, PDF, images, video, audio, code and more in the browser. Zero dependencies, nothing is uploaded."
+    />
+    <link rel="icon" href="samples/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="top">
+      <a class="brand" href="./">AnyView</a>
+      <nav aria-label="Main">
+        <a href="#playground">Playground</a>
+        <a href="#start">Quick start</a>
+        <a href="#formats">Formats</a>
+        <a href="#docs">Docs</a>
+        <a href="https://github.com/pushpa1105/anyview">GitHub</a>
+        <a href="https://www.npmjs.com/package/@buffmomo/anyview">npm</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>One viewer for every file</h1>
+        <p class="lead">
+          AnyView previews Word, Excel and PowerPoint files, PDFs, images, video, audio, code and
+          more, entirely in the browser. No dependencies, no server, nothing uploaded.
+        </p>
+        <div class="install">
+          <code id="install-command">npm install @buffmomo/anyview</code>
+          <button type="button" id="copy-install">Copy</button>
+        </div>
+        <ul class="facts">
+          <li><strong>Zero runtime dependencies.</strong> Every parser is part of the package.</li>
+          <li><strong>Private.</strong> Files are read on the visitor's device.</li>
+          <li><strong>Small.</strong> Each format's code loads only when it is needed.</li>
+          <li>
+            <strong>Works anywhere.</strong> Plain JavaScript, a web component, React and Vue.
+          </li>
+        </ul>
+      </section>
+
+      <section id="playground" aria-labelledby="playground-title">
+        <h2 id="playground-title">Playground</h2>
+        <p>
+          Pick a sample, or open a file of your own. Your file stays in this browser tab; it is not
+          sent anywhere.
+        </p>
+        <div class="controls">
+          <div class="samples" id="samples" role="group" aria-label="Sample files"></div>
+          <div class="actions">
+            <button type="button" class="primary" id="open-file">Open a file…</button>
+            <input type="file" id="file-input" hidden />
+            <label>
+              Theme
+              <select id="theme">
+                <option value="auto">Auto</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+              </select>
+            </label>
+            <label class="check"><input type="checkbox" id="toolbar" checked /> Toolbar</label>
+          </div>
+        </div>
+        <div class="stage" id="stage">
+          <div id="viewer"></div>
+          <div class="drop-hint" id="drop-hint">Drop the file to open it</div>
+        </div>
+        <p class="status" id="status" role="status">Loading the viewer…</p>
+      </section>
+
+      <section id="start" aria-labelledby="start-title">
+        <h2 id="start-title">Quick start</h2>
+        <div class="tabs" role="tablist" aria-label="Framework">
+          <button type="button" role="tab" aria-selected="true" data-tab="js">JavaScript</button>
+          <button type="button" role="tab" aria-selected="false" data-tab="element">
+            Web component
+          </button>
+          <button type="button" role="tab" aria-selected="false" data-tab="react">React</button>
+          <button type="button" role="tab" aria-selected="false" data-tab="vue">Vue</button>
+        </div>
+        <pre data-panel="js"><code>import { createViewer } from '@buffmomo/anyview';
+
+const viewer = createViewer('#preview', {
+  src: '/files/quarterly-report.xlsx',
+  theme: 'auto',
+});
+
+viewer.on('load', ({ format, file }) => {
+  console.log(`Showing ${file.name} as ${format.label}`);
+});</code></pre>
+        <pre data-panel="element" hidden><code>&lt;script type="module"&gt;
+  import '@buffmomo/anyview/element';
+&lt;/script&gt;
+
+&lt;any-view src="/files/contract.docx" theme="light" style="height: 600px"&gt;&lt;/any-view&gt;</code></pre>
+        <pre data-panel="react" hidden><code>import { AnyView } from '@buffmomo/anyview/react';
+
+export function Preview({ file }) {
+  return &lt;AnyView src={file} style={{ height: 600 }} onError={console.error} /&gt;;
+}</code></pre>
+        <pre data-panel="vue" hidden><code>&lt;script setup&gt;
+import { AnyView } from '@buffmomo/anyview/vue';
+defineProps(['file']);
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;AnyView :src="file" style="height: 600px" /&gt;
+&lt;/template&gt;</code></pre>
+        <p>
+          The container needs a height. Sources can be a URL, a <code>File</code>, a
+          <code>Blob</code> or raw bytes.
+        </p>
+      </section>
+
+      <section id="formats" aria-labelledby="formats-title">
+        <h2 id="formats-title">Supported formats</h2>
+        <p>This list is read from the package itself, version <span id="version">…</span>.</p>
+        <div class="formats" id="format-list"></div>
+      </section>
+
+      <section id="docs" aria-labelledby="docs-title">
+        <h2 id="docs-title">Documentation</h2>
+        <ul class="cards">
+          <li>
+            <a href="https://github.com/pushpa1105/anyview#readme">Guide and API reference</a>
+            <span>Options, methods, events, errors, theming and translation.</span>
+          </li>
+          <li>
+            <a href="https://github.com/pushpa1105/anyview/blob/main/docs/formats.md"
+              >What each format shows</a
+            >
+            <span>Per-format detail, including what is not drawn.</span>
+          </li>
+          <li>
+            <a href="https://github.com/pushpa1105/anyview/blob/main/docs/security.md">Security</a>
+            <span>How untrusted files are handled.</span>
+          </li>
+          <li>
+            <a href="https://github.com/pushpa1105/anyview/blob/main/docs/custom-renderers.md"
+              >Custom renderers</a
+            >
+            <span>Add your own format or replace a built-in one.</span>
+          </li>
+          <li>
+            <a href="https://github.com/pushpa1105/anyview/blob/main/CHANGELOG.md">Changelog</a>
+            <span>What changed in each version.</span>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        MIT licensed. Source on
+        <a href="https://github.com/pushpa1105/anyview">GitHub</a>.
+      </p>
+    </footer>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

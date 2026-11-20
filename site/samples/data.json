@@ -1,0 +1,11 @@
+{
+  "package": "@buffmomo/anyview",
+  "runtimeDependencies": 0,
+  "entryPoints": [".", "./element", "./react", "./vue"],
+  "viewer": {
+    "theme": "auto",
+    "toolbar": { "zoom": true, "pagination": true, "download": true, "print": true },
+    "maxFileSize": 209715200
+  },
+  "categories": ["document", "spreadsheet", "presentation", "image", "video", "audio", "text"]
+}

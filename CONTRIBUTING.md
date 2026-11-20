@@ -15,17 +15,18 @@ npm test
 
 ## Commands
 
-| Command                 | What it does                                                                                                         |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `npm run build`         | Builds `dist/` (ESM, CommonJS and type declarations) with tsup                                                       |
-| `npm run dev`           | Rebuilds on change                                                                                                   |
-| `npm test`              | Runs unit and integration tests (Vitest with a simulated DOM)                                                        |
-| `npm run test:coverage` | The same with a coverage report; fails below 90% lines                                                               |
-| `npm run test:browser`  | Builds, then opens every sample file in real Chrome or Edge and saves screenshots to `tests/.generated/screenshots/` |
-| `npm run lint`          | ESLint, including the "no markup injection" security rule                                                            |
-| `npm run typecheck`     | TypeScript in strict mode over sources and tests                                                                     |
-| `npm run format`        | Prettier                                                                                                             |
-| `npm run check:package` | Validates the published package with publint and Are The Types Wrong                                                 |
+| Command                 | What it does                                                                                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run build`         | Builds `dist/` (ESM, CommonJS and type declarations) with tsup                                                                                      |
+| `npm run dev`           | Rebuilds on change                                                                                                                                  |
+| `npm test`              | Runs unit and integration tests (Vitest with a simulated DOM)                                                                                       |
+| `npm run test:coverage` | The same with a coverage report; fails below 90% lines                                                                                              |
+| `npm run test:browser`  | Builds, then opens every sample file in real Chrome or Edge and saves screenshots to `tests/.generated/screenshots/`                                |
+| `npm run site`          | Assembles the documentation site and playground into `dist-site/` (run `npm test` and `npm run build` first); preview it with `npx serve dist-site` |
+| `npm run lint`          | ESLint, including the "no markup injection" security rule                                                                                           |
+| `npm run typecheck`     | TypeScript in strict mode over sources and tests                                                                                                    |
+| `npm run format`        | Prettier                                                                                                                                            |
+| `npm run check:package` | Validates the published package with publint and Are The Types Wrong                                                                                |
 
 Before opening a pull request, run:
 

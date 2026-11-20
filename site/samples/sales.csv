@@ -1,0 +1,11 @@
+Region,Product,Units,Unit price,Revenue,Date
+North,Notebook,120,4.50,540.00,2026-01-15
+North,Pen,340,1.20,408.00,2026-01-18
+South,Notebook,95,4.50,427.50,2026-02-02
+South,Backpack,22,39.00,858.00,2026-02-09
+East,Pen,510,1.20,612.00,2026-02-20
+East,Calculator,48,12.75,612.00,2026-03-03
+West,Backpack,31,39.00,1209.00,2026-03-11
+West,Notebook,150,4.50,675.00,2026-03-19
+North,Calculator,60,12.75,765.00,2026-04-01
+South,Pen,275,1.20,330.00,2026-04-14

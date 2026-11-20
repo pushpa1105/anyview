@@ -1,5 +1,14 @@
 # @buffmomo/anyview
 
+[![npm version](https://img.shields.io/npm/v/@buffmomo/anyview)](https://www.npmjs.com/package/@buffmomo/anyview)
+[![CI](https://github.com/pushpa1105/anyview/actions/workflows/ci.yml/badge.svg)](https://github.com/pushpa1105/anyview/actions/workflows/ci.yml)
+[![npm downloads](https://img.shields.io/npm/dm/@buffmomo/anyview)](https://www.npmjs.com/package/@buffmomo/anyview)
+[![types included](https://img.shields.io/npm/types/@buffmomo/anyview)](https://www.npmjs.com/package/@buffmomo/anyview)
+[![zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)](package.json)
+[![license](https://img.shields.io/npm/l/@buffmomo/anyview)](LICENSE)
+
+**[Try the playground](https://pushpa1105.github.io/anyview/)** · [Formats](docs/formats.md) · [Security](docs/security.md) · [Changelog](CHANGELOG.md)
+
 **One viewer for every file.** AnyView previews documents, spreadsheets, presentations, PDFs, images, video, audio, code and more, entirely in the browser. It works with plain JavaScript, as a web component, and has thin wrappers for React and Vue.
 
 - **Zero runtime dependencies.** The ZIP reader, XML parser, DOCX/XLSX/PPTX renderers, Markdown parser and syntax highlighter are all written in this package.
@@ -503,11 +512,11 @@ npm run lint && npm run typecheck
 
 ## Author and contributors
 
-Created and maintained by [pushpa1105](https://www.npmjs.com/org/buffmomo).
+Created and maintained by [pushpa1105](https://github.com/pushpa1105).
 
 Contributors:
 
-- [pushpa1105](https://www.npmjs.com/org/buffmomo)
+- [pushpa1105](https://github.com/pushpa1105)
 
 ## License
 

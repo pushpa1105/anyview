@@ -1,0 +1,14 @@
+version: 2
+updates:
+  # Development tools only: the package has no runtime dependencies.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      dev-tools:
+        patterns: ['*']
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
